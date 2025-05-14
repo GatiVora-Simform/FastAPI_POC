@@ -15,8 +15,8 @@ class UserRepository:
         self.db.add(user)
         self.db.commit()
         self.db.refresh(user)
-        return UserOutput.model_validate(user)  # Use from_orm for consistency
-    
+        return UserOutput.model_validate(user) 
+
     def get_by_email(self, email:str):
         user =  self.db.query(User).filter(User.email == email).first()
         if user:
