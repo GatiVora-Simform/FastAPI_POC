@@ -8,7 +8,10 @@ class UserService:
     def __init__(self, db: Session):
         self.repository = UserRepository(db)
 
-    def create(self, userin: UserInput) -> UserOutput:
+    def create(self, userin: UserInput):
+        """
+        Create a new user.
+        """
         if self.repository.get_by_email(userin.email):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -22,11 +25,17 @@ class UserService:
         user = self.repository.create(userin)
         return UserOutput.model_validate(user)
 
-    def get_all(self) -> list[UserOutput]:
+    def get_all(self):
+        """
+        Get all users.
+        """
         users = self.repository.get_all_users()
         return [UserOutput.model_validate(user) for user in users]
 
-    def get_by_email(self, email: str) -> UserOutput:
+    def get_by_email(self, email: str):
+        """
+        Get user by email.
+        """
         user = self.repository.get_by_email(email)
         if not user:
             raise HTTPException(
@@ -35,7 +44,10 @@ class UserService:
             )
         return UserOutput.model_validate(user)
     
-    def get_by_username(self, username: str) -> UserOutput:
+    def get_by_username(self, username: str):
+        """
+        Get user by username.
+        """
         user = self.repository.get_by_username(username)
         if not user:
             raise HTTPException(
@@ -44,7 +56,10 @@ class UserService:
             )
         return UserOutput.model_validate(user)
 
-    def get_by_id(self, user_id: UUID) -> UserOutput:
+    def get_by_id(self, user_id: UUID):
+        """
+        Get user by id.
+        """
         user = self.repository.get_by_id(user_id)
         if not user:
             raise HTTPException(
@@ -53,7 +68,10 @@ class UserService:
             )
         return UserOutput.model_validate(user)
 
-    def update_user(self, user_id: UUID, userin: UserInput) -> UserOutput:
+    def update_user(self, user_id: UUID, userin: UserInput):
+        """
+        Update user by id.
+        """
         user = self.repository.update_user(user_id, userin)
         if not user:
             raise HTTPException(
@@ -62,7 +80,10 @@ class UserService:
             )
         return UserOutput.model_validate(user)
 
-    def delete_user(self, user_id: UUID) -> UserOutput:
+    def delete_user(self, user_id: UUID):
+        """
+        Delete user by id.
+        """
         user = self.repository.delete_user(user_id)
         if not user:
             raise HTTPException(

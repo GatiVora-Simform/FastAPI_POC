@@ -6,6 +6,9 @@ from utils.init_db import create_tables
 
 @asynccontextmanager
 async def lifespan(app:FastAPI):
+    
+    '''Create tables in the database on startup and drop them on shutdown.'''
+
     create_tables()
     print("Database tables created.")
     yield

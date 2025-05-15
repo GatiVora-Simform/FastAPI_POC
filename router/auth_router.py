@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, status, Request
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
 from config.database import get_db
@@ -12,6 +12,9 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    """
+    User login endpoint.
+    """
     user_repo = UserRepository(db)
     user = user_repo.get_by_username(form_data.username)
 
@@ -29,6 +32,9 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
 
 @router.post("/refresh", response_model=Token)
 def refresh_token(refresh_token: str = Query(...)):
+    """
+    Refresh access token using refresh token.
+    """
     payload = verify_token(refresh_token)
     if not payload:
         raise HTTPException(status_code=401, detail="Invalid refresh token")
