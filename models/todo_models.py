@@ -4,9 +4,11 @@ from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from config.database import Base
 
+# TodoBase = declarative_base()
 
 class TodoModel(Base):
     __tablename__ = "todos"
+    __allowed_unmapped__ = True
 
     id = Column(Integer, primary_key=True)
     title = Column(String, nullable=False)

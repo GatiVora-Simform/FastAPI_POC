@@ -3,7 +3,6 @@ from models.user_models import User
 from schemas.user_schema import UserInput, UserOutput
 from utils.security import hash_password
 
-
 class UserRepository:
     def __init__(self, db):
         self.db = db
