@@ -7,6 +7,7 @@ from utils.auth import create_access_token, create_refresh_token, verify_token
 from utils.security import verify_password
 from schemas.auth_schema import Token
 from models.user_models import User
+# from ..models.user_models import User
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 

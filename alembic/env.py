@@ -18,12 +18,10 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
  
  
-DATABASE_URL = os.getenv("DATABASE_URL")
- 
+DATABASE_URL = os.getenv("DATABASE_URL") 
  
 target_metadata = Base.metadata
- 
- 
+  
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode."""
     url = DATABASE_URL
